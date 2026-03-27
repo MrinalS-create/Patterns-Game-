@@ -1,0 +1,532 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f62fe 0%, #001d6c 100%);
+    overflow: hidden;
+    color: #161616;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Canvas Styles */
+#gameCanvas {
+    display: block;
+    background: #f4f4f4;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* UI Overlay - Positioned relative to game container for proper canvas alignment */
+#ui-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1600px;
+    height: 90%;
+    max-height: 900px;
+    pointer-events: none;
+    padding: 20px;
+}
+
+.ui-element {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 12px;
+}
+
+/* Health Bar */
+#health-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+}
+
+.bar-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #161616;
+    margin-bottom: 6px;
+}
+
+.bar-container {
+    width: 100%;
+    height: 24px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #24a148 0%, #198038 100%);
+    transition: width 0.3s ease;
+    border-radius: 12px;
+}
+
+.bar-value {
+    font-size: 11px;
+    color: #525252;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* Tool Inventory - Hidden (not needed for Day 1 learning) */
+#tool-inventory {
+    display: none !important;
+}
+
+.inventory-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #161616;
+    margin-bottom: 8px;
+}
+
+.tool-slots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.tool-slot {
+    aspect-ratio: 1;
+    background: #e0e0e0;
+    border: 2px solid #c6c6c6;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.tool-slot.has-tool {
+    background: #ffffff;
+    border-color: #0f62fe;
+}
+
+.tool-slot.active {
+    background: #e8f4ff;
+    border-color: #0043ce;
+    box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.2);
+}
+
+.tool-slot.cooldown {
+    opacity: 0.5;
+}
+
+.tool-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.tool-key {
+    font-size: 10px;
+    color: #525252;
+    font-weight: 600;
+}
+
+.tool-cooldown {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 9px;
+    color: #da1e28;
+    font-weight: 700;
+}
+
+/* Mastery Progress */
+#mastery-progress {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+    max-height: 180px;
+    overflow: hidden;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+#mastery-progress:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Compact mastery bars */
+.mastery-item {
+    margin-bottom: 2px;
+}
+
+.mastery-name {
+    font-size: 10px !important;
+    min-width: 70px !important;
+}
+
+.mastery-bar {
+    height: 12px !important;
+}
+
+.mastery-value {
+    font-size: 9px !important;
+    min-width: 30px !important;
+}
+
+.mastery-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #161616;
+    margin-bottom: 8px;
+}
+
+.mastery-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mastery-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mastery-name {
+    font-size: 11px;
+    color: #161616;
+    min-width: 80px;
+    font-weight: 500;
+}
+
+.mastery-bar {
+    flex: 1;
+    height: 16px;
+    background: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mastery-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0f62fe 0%, #0043ce 100%);
+    transition: width 0.5s ease;
+    border-radius: 8px;
+}
+
+.mastery-value {
+    font-size: 10px;
+    color: #525252;
+    min-width: 35px;
+    text-align: right;
+}
+
+/* Level Info */
+#level-info {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
+}
+
+#level-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #161616;
+    margin-bottom: 4px;
+}
+
+#level-timer {
+    font-size: 12px;
+    color: #525252;
+}
+
+/* Menu Styles */
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.menu.hidden {
+    display: none;
+}
+
+.menu-content {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.menu-content h2 {
+    font-size: 32px;
+    color: #161616;
+    margin-bottom: 24px;
+}
+
+.menu-content p {
+    font-size: 16px;
+    color: #525252;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Level Objectives */
+.level-objectives {
+    text-align: left;
+    margin: 24px 0;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+}
+
+.level-objectives h3 {
+    font-size: 16px;
+    color: #161616;
+    margin-bottom: 12px;
+}
+
+.level-objectives ul {
+    list-style: none;
+    padding: 0;
+}
+
+.level-objectives li {
+    font-size: 14px;
+    color: #525252;
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.level-objectives li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #0f62fe;
+    font-weight: bold;
+}
+
+/* Completion Stats */
+.completion-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #525252;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 18px;
+    color: #0f62fe;
+    font-weight: 700;
+}
+
+/* Menu Buttons */
+.menu-btn {
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 8px;
+    pointer-events: auto;
+}
+
+.menu-btn.primary {
+    background: #0f62fe;
+    color: #ffffff;
+}
+
+.menu-btn.primary:hover {
+    background: #0043ce;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+}
+
+.menu-btn:not(.primary) {
+    background: #e0e0e0;
+    color: #161616;
+}
+
+.menu-btn:not(.primary):hover {
+    background: #c6c6c6;
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #ui-overlay {
+        padding: 10px;
+    }
+    
+    .ui-element {
+        padding: 8px 12px;
+    }
+    
+    #health-bar,
+    #tool-inventory,
+    #mastery-progress,
+    #level-info {
+        position: static;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .tool-slots {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .menu-content {
+        padding: 24px;
+    }
+}
+
+/* Tutorial Hints */
+#tutorial-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 98, 254, 0.95);
+    color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    text-align: center;
+    z-index: 999;
+    pointer-events: none;
+}
+
+#tutorial-hint.hidden {
+    display: none;
+}
+
+.hint-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.hint-icon {
+    font-size: 32px;
+}
+
+.hint-text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.tool-slot.active {
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-content {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+#tutorial-hint {
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.collectible-highlight {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+/* Made with Bob */

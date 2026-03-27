@@ -1,0 +1,419 @@
+/* Interactive Learning System Styles */
+
+/* Modal Overlay - CRITICAL: Must be positioned and have high z-index */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.interactive-learning-modal {
+    background: white;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 24px;
+    border-bottom: 2px solid #e0e0e0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px 16px 0 0;
+    position: relative;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 28px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.modal-close-btn:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+.modal-header h2 {
+    margin: 0 0 16px 0;
+    font-size: 28px;
+    font-weight: 700;
+    padding-right: 40px; /* Make room for close button */
+}
+
+.progress-dots {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+.progress-dot.completed {
+    background: #4caf50;
+}
+
+.modal-body {
+    padding: 32px;
+    min-height: 300px;
+}
+
+.modal-footer {
+    padding: 20px 24px;
+    border-top: 2px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Concept Section */
+.concept-section {
+    text-align: center;
+}
+
+.concept-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.concept-section h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.concept-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.principles {
+    text-align: left;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.principles h4 {
+    margin: 0 0 12px 0;
+    color: #667eea;
+    font-size: 18px;
+}
+
+.principles ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.principles li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Use Cases Section */
+.use-cases-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.use-case {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 2px solid #e0e0e0;
+}
+
+.use-case h4 {
+    margin: 0 0 12px 0;
+    color: #667eea;
+    font-size: 16px;
+}
+
+.comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wrong, .right {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.wrong {
+    background: #ffebee;
+    border-left: 4px solid #f44336;
+    color: #c62828;
+}
+
+.right {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
+}
+
+/* Challenge Section */
+.challenge-section {
+    text-align: center;
+}
+
+.challenge-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.challenge-question {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.challenge-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.challenge-option {
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    text-align: left;
+}
+
+.challenge-option:hover {
+    border-color: #667eea;
+    background: #f5f7ff;
+    transform: translateX(4px);
+}
+
+.challenge-option.selected {
+    border-width: 3px;
+}
+
+.challenge-option.correct {
+    border-color: #4caf50;
+    background: #e8f5e9;
+}
+
+.challenge-option.incorrect {
+    border-color: #f44336;
+    background: #ffebee;
+}
+
+.challenge-feedback {
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.challenge-feedback.success {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    color: #2e7d32;
+}
+
+.challenge-feedback.error {
+    background: #ffebee;
+    border: 2px solid #f44336;
+    color: #c62828;
+}
+
+/* Validation Section */
+.validation-section {
+    text-align: center;
+}
+
+.validation-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.validation-prompt {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.validation-input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.validation-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.validation-feedback {
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.validation-feedback.success {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    color: #2e7d32;
+}
+
+.validation-feedback.warning {
+    background: #fff3e0;
+    border: 2px solid #ff9800;
+    color: #e65100;
+}
+
+.validation-hint {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #555;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #d0d0d0;
+}
+
+.btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .interactive-learning-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .concept-icon {
+        font-size: 48px;
+    }
+    
+    .modal-header h2 {
+        font-size: 22px;
+    }
+}
+
+/* Made with Bob */
